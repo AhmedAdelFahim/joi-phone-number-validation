@@ -1,6 +1,6 @@
 {
     "name": "joi-phone-number-validation",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Joi Phone Number is validation rule for Joi",
     "main": "build/index.js",
     "files": [
@@ -14,7 +14,7 @@
         "prepare": "npm run build",
         "prepublishOnly": "npm run lint",
         "preversion": "npm run lint && npm run test",
-        "test": "mocha -r ts-node/register src/test/helpers/init.ts src/test/**/*.test.ts"
+        "test": "mocha -r ts-node/register src/test/**/*.test.ts"
     },
     "keywords": [
         "joi",
