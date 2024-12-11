@@ -59,7 +59,7 @@ describe('Joi Phone Number Testing', function () {
 
     it('Should get VALUE__WITH_EXTRA_INFO.', async function () {
       const schema = JoiPhoneNumber.string().phoneNumber({
-        returningFormat: RETURNING_FORMAT.VALUE__WITH_EXTRA_INFO,
+        returningFormat: RETURNING_FORMAT.VALUE_WITH_EXTRA_INFO,
       });
       const { value, error } = schema.validate('+2010 605 944 88');
       assert.equal(error, undefined);

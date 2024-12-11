@@ -8,7 +8,7 @@ export enum RETURNING_FORMAT {
   INTERNATIONAL = 'INTERNATIONAL',
   'E.164' = 'E.164',
   RFC3966 = 'RFC3966',
-  VALUE__WITH_EXTRA_INFO = 'VALUE__WITH_EXTRA_INFO',
+  VALUE_WITH_EXTRA_INFO = 'VALUE_WITH_EXTRA_INFO',
 }
 
 const JoiPhoneNumber = (joi: Joi.Root): Joi.Extension => {
@@ -42,7 +42,7 @@ const JoiPhoneNumber = (joi: Joi.Root): Joi.Extension => {
               switch (returningFormat) {
                 case RETURNING_FORMAT.FORMATTED_VALUE:
                   return parsedNumber.number;
-                case RETURNING_FORMAT.VALUE__WITH_EXTRA_INFO:
+                case RETURNING_FORMAT.VALUE_WITH_EXTRA_INFO:
                   return {
                     originalValue: value,
                     nationalNumber: parsedNumber.nationalNumber,
