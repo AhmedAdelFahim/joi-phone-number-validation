@@ -1,6 +1,6 @@
 {
     "name": "joi-phone-number-validation",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Joi Phone Number is validation rule for Joi",
     "main": "build/index.js",
     "files": [
