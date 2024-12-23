@@ -1,68 +1,101 @@
-# Joi Phone Number
+# Joi XSS Sanitizer
 
-Joi Phone Number is validation rule for [Joi](https://www.npmjs.com/package/joi).
+**🛡️ A powerful Joi extension for HTML sanitization and XSS prevention. Seamlessly validate and sanitize HTML content in your Node.js applications**
 
-[![Latest Stable Version](https://img.shields.io/npm/v/joi-phone-number-validation.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-phone-number-validation)
-[![License](https://img.shields.io/npm/l/joi-phone-number-validation.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-phone-number-validation)
-[![NPM Downloads](https://img.shields.io/npm/dt/joi-phone-number-validation.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-phone-number-validation)
-[![NPM Downloads](https://img.shields.io/npm/dm/joi-phone-number-validation.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-phone-number-validation)
+[![Latest Stable Version](https://img.shields.io/npm/v/joi-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-xss-sanitizer)
+[![License](https://img.shields.io/npm/l/joi-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-xss-sanitizer)
+[![NPM Downloads](https://img.shields.io/npm/dt/joi-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-xss-sanitizer)
+[![NPM Downloads](https://img.shields.io/npm/dm/joi-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/joi-xss-sanitizer)
 
-## Installation
+## 🚀 Features
+
+- 🛡️ **XSS Protection**: Sanitizes user inputs to prevent cross-site scripting (XSS) attacks.
+- ✅ **Flexible Validation**: Supports validation and sanitization at different action levels (`VALIDATE` or `SANITIZE`).
+- 🔧 **Customizable**: Configure allowed tags, attributes, and other options via [sanitize-html](https://www.npmjs.com/package/sanitize-html).
+- 🧩 **Seamless Integration**: Easily integrates with Joi schema validations.
+
+---
+
+## 📦 Installation
+
+Install the package using npm or yarn:
 
 ```bash
-$ npm i joi-phone-number-validation
+npm install joi-xss-sanitizer
+# or
+yarn add joi-xss-sanitizer
 ```
 
-## Usage
+## 📖 Usage
+
+### Basic Example
 
 ```javascript
-const { JoiPhoneNumber, RETURNING_FORMAT } = require("joi-phone-number-validation");
+import { JoiXssSanitizer, ACTION_LEVELS } from 'joi-xss-sanitizer';
 
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.NATIONAL,
-});
-const { value, error } = schema.validate('+2010 605 944 88');   // 010 60594488
+// or
 
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.INTERNATIONAL,
-});
-const { value, error } = schema.validate('+2010 605 944 88');   // +20 10 60594488
+const {JoiXssSanitizer, ACTION_LEVELS} = require('joi-xss-sanitizer');
 
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.ORIGINAL,
-});
-const { value, error } = schema.validate('+2010 605 944 88');   // +2010 605 944 88
+const input = '<p onclick="return;">Test</p>';
 
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.FORMATTED_VALUE,
+const schema = JoiXssSanitizer.string().sanitizer({
+  actionLevel: ACTION_LEVELS.VALIDATE,
+  sanitizerOptions: {
+    allowedAttributes: { h1: ['onclick'] },
+    allowedTags: ['b', 'i'], // Allow specific HTML tags
+  },
 });
-const { value, error } = schema.validate('+2010 605 944 88');   // +201060594488
-
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.RFC3966,
-});
-const { value, error } = schema.validate('+2010 605 944 88');   // tel:+201060594488
-
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT['E.164'],
-});
-const { value, error } = schema.validate('+2010 605 944 88');   // +201060594488
-
-const schema = JoiPhoneNumber.string().phoneNumber({
-  returningFormat: RETURNING_FORMAT.VALUE_WITH_EXTRA_INFO,
-});
-const { value, error } = schema.validate('+2010 605 944 88');   
-/*
-output: {
-        countryCode: 'EG',
-        formattedNumber: '+201060594488',
-        nationalNumber: '1060594488',
-        originalValue: '+2010 605 944 88',
-        countryCallingCode: '20',
-      }
-*/
+const result = schema.validate(input); // result.error contains error
 ```
 
+### Advanced Example: Nested Objects
+
+```javascript
+import { JoiXssSanitizer, ACTION_LEVELS } from 'joi-xss-sanitizer';
+
+// or
+
+const {JoiXssSanitizer, ACTION_LEVELS} = require('joi-xss-sanitizer');
+
+const schema = Joi.object({
+  username: JoiXssSanitizer.string().sanitizer({
+    actionLevel: ACTION_LEVELS.SANITIZE,
+  }),
+  profile: Joi.object({
+    bio: JoiXssSanitizer.string().sanitizer({
+      actionLevel: ACTION_LEVELS.SANITIZE,
+      sanitizerOptions: {
+        allowedTags: ['b', 'i', 'u'],
+      },
+    }),
+  }),
+});
+
+const input = {
+  username: '<script>malicious()</script>',
+  profile: {
+    bio: '<b>Welcome!</b> <img src="x" />',
+  },
+};
+
+const result = schema.validate(input);
+console.log(result.value);
+```
+## 🔧 API Reference
+`sanitizer(options)`
+
+* *Description:* Adds XSS sanitization and validation to your Joi schema.
+* *Parameters:*
+  * `options` (Object):
+    * `actionLevel` (String):
+      * `SANITIZE` - Returns sanitized content.
+      * `VALIDATE` - Throws an error for unsafe content.
+    * `sanitizerOptions` (Object): Configuration options for [sanitize-html](https://www.npmjs.com/package/sanitize-html).
+## 💡 Best Practices
+1. Always validate and sanitize user inputs on the server side.
+2. Use custom sanitizerOptions to allow only the required HTML tags and attributes.
+3. Pair this library with a Content Security Policy (CSP) for enhanced XSS protection.
 
 ## Tests
 
@@ -73,6 +106,6 @@ $ npm install
 $ npm test
 ```
 
-## Support
+## 📬 Feedback and Support
 
-Feel free to open issues on [github](https://github.com/AhmedAdelFahim/joi-phone-number-validation).
+Have questions or feedback? Open an issue on [GitHub](https://github.com/AhmedAdelFahim/joi-xss-sanitizer) or reach out via email.
