@@ -1,6 +1,6 @@
 {
-    "name": "joi-phone-number-validation",
-    "version": "1.0.2",
+    "name": "joi-xss-sanitizer",
+    "version": "1.0.0",
     "description": "Joi Phone Number is validation rule for Joi",
     "main": "build/index.js",
     "files": [
@@ -19,18 +19,21 @@
     "keywords": [
         "joi",
         "validation",
-        "phone number"
+        "sanitizer",
+        "xss",
+        "security"
     ],
     "author": "Ahmed Adel",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/AhmedAdelFahim/joi-phone-number-validation/issues"
+        "url": "https://github.com/AhmedAdelFahim/joi-xss-sanitizer/issues"
     },
-    "homepage": "https://github.com/AhmedAdelFahim/joi-phone-number-validation#readme",
+    "homepage": "https://github.com/AhmedAdelFahim/joi-xss-sanitizer#readme",
     "devDependencies": {
         "@types/mocha": "^10.0.6",
         "@types/node": "^18.11.18",
         "@types/ramda": "^0.28.22",
+        "@types/sanitize-html": "^2.13.0",
         "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.49.0",
         "eslint": "^8.33.0",
@@ -45,6 +48,6 @@
     },
     "dependencies": {
         "joi": "^17.13.3",
-        "libphonenumber-js": "^1.11.16"
+        "sanitize-html": "^2.14.0"
     }
 }
