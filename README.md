@@ -31,7 +31,11 @@ yarn add joi-xss-sanitizer
 ### Basic Example
 
 ```javascript
-import JoiXssSanitizer, { ACTION_LEVELS } from 'joi-xss-sanitizer';
+import { JoiXssSanitizer, ACTION_LEVELS } from 'joi-xss-sanitizer';
+
+// or
+
+const {JoiXssSanitizer, ACTION_LEVELS} = require('joi-xss-sanitizer');
 
 const input = '<p onclick="return;">Test</p>';
 
@@ -48,7 +52,11 @@ const result = schema.validate(input); // result.error contains error
 ### Advanced Example: Nested Objects
 
 ```javascript
-import JoiXssSanitizer, { ACTION_LEVELS } from 'joi-xss-sanitizer';
+import { JoiXssSanitizer, ACTION_LEVELS } from 'joi-xss-sanitizer';
+
+// or
+
+const {JoiXssSanitizer, ACTION_LEVELS} = require('joi-xss-sanitizer');
 
 const schema = Joi.object({
   username: JoiXssSanitizer.string().sanitizer({

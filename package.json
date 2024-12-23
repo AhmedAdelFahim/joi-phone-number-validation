@@ -1,7 +1,7 @@
 {
     "name": "joi-xss-sanitizer",
-    "version": "1.0.0",
-    "description": "Joi Phone Number is validation rule for Joi",
+    "version": "1.0.1",
+    "description": "A powerful Joi extension for HTML sanitization and XSS prevention. Seamlessly validate and sanitize HTML content in your Node.js applications",
     "main": "build/index.js",
     "files": [
         "build/**/*"
