@@ -1,3 +1,3 @@
-import JoiXssSanitizer, { ACTION_LEVELS } from './lib/joi-xss-sanitizer';
+import JoiPhoneNumber, { RETURNING_FORMAT } from './lib/joi-phone-number';
 
-export { JoiXssSanitizer, ACTION_LEVELS };
+export { JoiPhoneNumber, RETURNING_FORMAT };

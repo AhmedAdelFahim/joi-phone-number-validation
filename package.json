@@ -1,7 +1,7 @@
 {
-    "name": "joi-xss-sanitizer",
-    "version": "1.0.1",
-    "description": "A powerful Joi extension for HTML sanitization and XSS prevention. Seamlessly validate and sanitize HTML content in your Node.js applications",
+    "name": "joi-phone-number-validation",
+    "version": "1.0.2",
+    "description": "Joi Phone Number is validation rule for Joi",
     "main": "build/index.js",
     "files": [
         "build/**/*"
@@ -19,21 +19,18 @@
     "keywords": [
         "joi",
         "validation",
-        "sanitizer",
-        "xss",
-        "security"
+        "phone number"
     ],
     "author": "Ahmed Adel",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/AhmedAdelFahim/joi-xss-sanitizer/issues"
+        "url": "https://github.com/AhmedAdelFahim/joi-phone-number-validation/issues"
     },
-    "homepage": "https://github.com/AhmedAdelFahim/joi-xss-sanitizer#readme",
+    "homepage": "https://github.com/AhmedAdelFahim/joi-phone-number-validation#readme",
     "devDependencies": {
         "@types/mocha": "^10.0.6",
         "@types/node": "^18.11.18",
         "@types/ramda": "^0.28.22",
-        "@types/sanitize-html": "^2.13.0",
         "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.49.0",
         "eslint": "^8.33.0",
@@ -48,6 +45,6 @@
     },
     "dependencies": {
         "joi": "^17.13.3",
-        "sanitize-html": "^2.14.0"
+        "libphonenumber-js": "^1.11.16"
     }
 }
